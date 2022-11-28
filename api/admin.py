@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.models import Company,Employee
+from api.models import Company,Employee,User
 
 # Register your models here.
 
@@ -11,3 +11,4 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 admin.site.register(Company,CompanyAdmin)
 admin.site.register(Employee,EmployeeAdmin)
+admin.site.register(User)
