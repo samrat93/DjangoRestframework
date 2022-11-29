@@ -1,0 +1,4 @@
+Django==3.2.16
+djangorestframework==3.14.0
+djangorestframework_simplejwt==4.4.0
+drf_yasg==1.21.4
