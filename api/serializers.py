@@ -32,7 +32,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
-    fields = ['id', 'email', 'name']
+    fields = ['id', 'email', 'name','dob','state','gender','pimage','docs']
 
 class UserChangePasswordSerializer(serializers.Serializer):
   password = serializers.CharField(max_length=255, style={'input_type':'password'}, write_only=True)
@@ -72,7 +72,7 @@ class SendPasswordResetEmailSerializer(serializers.Serializer):
         'body':body,
         'to_email':user.email
       }
-      # Util.send_email(data)
+      Util.send_email(data)
       return attrs
     else:
       raise serializers.ValidationError('You are not a Registered User')

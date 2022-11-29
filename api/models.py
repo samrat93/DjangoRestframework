@@ -18,6 +18,16 @@ employeePositon = (
     ("cto","Chief Technical Officer"),
 )
 
+STATE_CHOICE = ((
+    ("Gujarat","Gujarat"),
+    ("Delhi","Delhi"),
+    ("Uttar Pardesh","Uttar Pardesh"),
+    ("Bihar","Bihar"),
+    ("West Bangal","West Bangal"),
+    ("Jharkhand","Jharkhand")
+))
+
+
 #  Custom User Manager
 class UserManager(BaseUserManager):
     def create_user(self, email, name, tc, password=None, password2=None):
@@ -60,11 +70,16 @@ class User(AbstractBaseUser):
         unique=True,
     )
     name = models.CharField(max_length=200)
-    tc = models.BooleanField()
+    tc = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    dob = models.DateField(auto_now=False, auto_now_add=False,null=True)
+    state = models.CharField(choices=STATE_CHOICE,max_length=50,null=True)
+    gender = models.CharField(max_length=50, null=True)
+    pimage = models.ImageField(upload_to='pimages',blank=True)
+    docs = models.FileField(upload_to='docs',blank=True)
 
     objects = UserManager()
 

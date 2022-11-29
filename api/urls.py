@@ -10,8 +10,6 @@ router.register(r'employee',EmployeeViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    # path('companies/', CompanyViewSet),
-    # path('employee/', EmployeeViewSet),
     path('register/', UserRegistrationView.as_view(), name='register'),
     path('login/', UserLoginView.as_view(), name='login'),
     path('profile/', UserProfileView.as_view(), name='profile'),
