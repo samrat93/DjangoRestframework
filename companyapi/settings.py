@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path,os
+from pathlib import Path, os
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework_simplejwt',
     'corsheaders',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
@@ -147,7 +148,7 @@ REST_FRAMEWORK = {
 }
 
 # Email Configuration
-EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
