@@ -1,30 +1,30 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
 # Create your models here.
 
 companyTypes = (
-    ("IT","Software"),
-    ("corporation","Corporation"),
-    ("cooperative","Cooperative"),
-    )
+    ("IT", "Software"),
+    ("corporation", "Corporation"),
+    ("cooperative", "Cooperative"),
+)
 
 employeePositon = (
-    ("fe","FrontEnd Software Developer"),
-    ("be","Backend Software Developer"),
-    ("manager","Project Manager"),
-    ("ceo","Chief Executive Officer"),
-    ("cto","Chief Technical Officer"),
+    ("fe", "FrontEnd Software Developer"),
+    ("be", "Backend Software Developer"),
+    ("manager", "Project Manager"),
+    ("ceo", "Chief Executive Officer"),
+    ("cto", "Chief Technical Officer"),
 )
 
 STATE_CHOICE = ((
-    ("Gujarat","Gujarat"),
-    ("Delhi","Delhi"),
-    ("Uttar Pardesh","Uttar Pardesh"),
-    ("Bihar","Bihar"),
-    ("West Bangal","West Bangal"),
-    ("Jharkhand","Jharkhand")
+    ("Gujarat", "Gujarat"),
+    ("Delhi", "Delhi"),
+    ("Uttar Pardesh", "Uttar Pardesh"),
+    ("Bihar", "Bihar"),
+    ("West Bangal", "West Bangal"),
+    ("Jharkhand", "Jharkhand")
 ))
 
 
@@ -60,8 +60,10 @@ class UserManager(BaseUserManager):
         user.is_admin = True
         user.save(using=self._db)
         return user
-      
-#custom user model
+
+# custom user model
+
+
 class User(AbstractBaseUser):
 
     email = models.EmailField(
@@ -75,11 +77,11 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    dob = models.DateField(auto_now=False, auto_now_add=False,null=True)
-    state = models.CharField(choices=STATE_CHOICE,max_length=50,null=True)
+    dob = models.DateField(auto_now=False, auto_now_add=False, null=True)
+    state = models.CharField(choices=STATE_CHOICE, max_length=50, null=True)
     gender = models.CharField(max_length=50, null=True)
-    pimage = models.ImageField(upload_to='pimages',blank=True)
-    docs = models.FileField(upload_to='docs',blank=True)
+    pimage = models.ImageField(upload_to='pimages', blank=True)
+    docs = models.FileField(upload_to='docs', blank=True)
 
     objects = UserManager()
 
@@ -105,6 +107,7 @@ class User(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+
 class Company(models.Model):
     """ Model for company table """
 
@@ -112,12 +115,13 @@ class Company(models.Model):
     companyName = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
     about = models.TextField()
-    type = models.CharField(max_length=100,choices=(companyTypes))
+    type = models.CharField(max_length=100, choices=(companyTypes))
     addedDate = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         return self.companyName
+
 
 class Employee(models.Model):
     """ Model for employee table """
@@ -127,6 +131,5 @@ class Employee(models.Model):
     phone = models.CharField(max_length=10)
     address = models.CharField(max_length=100)
     about = models.TextField()
-    position = models.CharField(max_length =50, choices=(employeePositon))
-    company = models.ForeignKey(Company,on_delete=models.CASCADE)
-
+    position = models.CharField(max_length=50, choices=(employeePositon))
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
