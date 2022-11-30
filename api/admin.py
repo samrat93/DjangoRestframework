@@ -12,6 +12,10 @@ class EmployeeAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone', 'address', 'position', 'company')
 
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'gender', 'state', 'pimage', 'docs')
+
+
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Employee, EmployeeAdmin)
-admin.site.register(User)
+admin.site.register(User, UserAdmin)
