@@ -13,7 +13,6 @@ from django.contrib.auth import authenticate
 # Generate Token Manually
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
-    # print('Reeeeeeeeeeeeeeeeeeeeeee : ', type(refresh))
     return {
         'refresh': str(refresh),
         'access': str(refresh.access_token),
@@ -36,7 +35,6 @@ class UserLoginView(APIView):
 
     def post(self, request, format=None):
         serializer = UserLoginSerializer(data=request.data)
-        # print('+++++', serializer)
         serializer.is_valid(raise_exception=True)
         email = serializer.data.get('email')
         password = serializer.data.get('password')
